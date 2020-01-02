@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 
 namespace MyJSONParser.Tokenize {
   public class TokenType {
-    public TokenType(string token, string pattern, ValueModifier modifier) {
+    public TokenType(string token, string pattern, ValueModifier modifier = null) {
       this.token = token;
       this.pattern = pattern;
       this.modifier = modifier;
@@ -53,18 +53,18 @@ namespace MyJSONParser.Tokenize {
     }
 
     static public List<TokenType> Types = new List<TokenType>() {
-      new TokenType("s", "\".*?\"", null),
-      new TokenType("n", @"-?(0|([1-9][0-9]*))(\.\d*[1-9])?((e|E)(\+|\-)?\d+)?", null),
-      new TokenType("t", "true", null),
-      new TokenType("f", "false", null),
-      new TokenType("nil", "null", null),
-      new TokenType("{", "{", null),
-      new TokenType("}", "}", null),
-      new TokenType("[", @"\[", null),
-      new TokenType("]", @"\]", null),
-      new TokenType(",", ",", null),
-      new TokenType(":", ":", null),
-      new TokenType("space", @"\s", null)
+      new TokenType("s", "\".*?\""),
+      new TokenType("n", @"-?(0|([1-9][0-9]*))(\.\d*[1-9])?((e|E)(\+|\-)?\d+)?"),
+      new TokenType("t", "true"),
+      new TokenType("f", "false"),
+      new TokenType("nil", "null"),
+      new TokenType("{", "{"),
+      new TokenType("}", "}"),
+      new TokenType("[", @"\["),
+      new TokenType("]", @"\]"),
+      new TokenType(",", ","),
+      new TokenType(":", ":"),
+      new TokenType("space", @"\s")
     };
 
     static public Tokens Tokenize(string input) {

@@ -5,11 +5,13 @@ using MyJSONParser.Core;
 namespace MyJSONParser {
   class Program {
     static void Main(string[] args) {
-      string str = "{ \"abc\": 123 }";
+      string str = "{ \"foo\": 123, \"bar\": [123], \"baz\": { \"foo\": true, \"arr\": [null, null, true, false, 563] } }";
 
       var tokens = Token.Tokenize(str);
-      Parser.Parse(tokens);
-      // Console.WriteLine(tokens);
+      var tree = Parser.Parse(tokens);
+
+      Console.WriteLine("\nResult:");
+      Console.WriteLine(tree);
     }
   }
 }
