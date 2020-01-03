@@ -53,7 +53,7 @@ namespace MyJSONParser.Tokenize {
     }
 
     static public List<TokenType> Types = new List<TokenType>() {
-      new TokenType("s", "\".*?\""),
+      new TokenType("s", "\".*?\"", (string s) => { return s.Substring(1, s.Length - 2); }),
       new TokenType("n", @"-?(0|([1-9][0-9]*))(\.\d*[1-9])?((e|E)(\+|\-)?\d+)?"),
       new TokenType("t", "true"),
       new TokenType("f", "false"),
@@ -77,7 +77,7 @@ namespace MyJSONParser.Tokenize {
           Match mc = Regex.Match(str, $"^{t.pattern}");
           if (!mc.Equals(Match.Empty)) {
             string value = t.modifier == null ? mc.ToString() : t.modifier(mc.ToString());
-            result.Add(new Token(t.token, mc.ToString()));
+            result.Add(new Token(t.token, value));
             str = str.Substring(mc.Length);
             hasToken = true;
             break;
